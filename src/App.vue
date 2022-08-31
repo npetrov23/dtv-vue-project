@@ -1,30 +1,70 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <notification v-model:show="notificationCreateVisible">Материал опубликован</notification>
+    <header-site 
+        @create="createPost" 
+        @show="showWindowCreatePost"
+        ></header-site>
+    <modal-window v-model:show="windowCreateVisible">
+      <feed-create @create="createPost"></feed-create>
+    </modal-window>
+    <feed-list :feeds="feeds" ></feed-list>
+  </div>
 </template>
 
+<script>
+import FeedList from './components/FeedList.vue';
+import HeaderSite from './components/HeaderSite.vue';
+import FeedCreate from './components/FeedCreate.vue';
+export default {
+    components: {
+    FeedList,
+    HeaderSite,
+    FeedCreate
+},
+    data() {
+        return {
+            feeds: [
+                {
+                    title: "Студия Hangar 13 подтвердила, что работает над следующей Mafia",
+                    description: "«До релиза всё ещё несколько лет».",
+                    img: "pic.jpg"
+                },
+                {
+                    title: "Студия Hangar 13 подтвердила, что работает над следующей Mafia",
+                    description: "«До релиза всё ещё несколько лет».",
+                    img: "pic.jpg"
+                },
+            ],
+            windowCreateVisible: false,
+            notificationCreateVisible: false,
+        };
+    },
+    methods: {
+        createPost(post) {
+            this.feeds.unshift(post);
+            this.windowCreateVisible = false;
+            this.notificationCreateVisible = true;
+            setTimeout(() => {
+                this.notificationCreateVisible = false
+            }, 1500)
+        },
+        showWindowCreatePost() {
+            this.windowCreateVisible = true;
+        },
+    },
+}
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    
 }
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+body {
+    padding-top: 60px;
 }
 </style>
