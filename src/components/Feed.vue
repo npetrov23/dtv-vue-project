@@ -2,7 +2,7 @@
 <section class="container">
     <div class="feed">
       <div class="feed__top">
-        <h1 class="feed__title">{{ feed.title }}</h1>
+        <h1 class="feed__title" @click="$router.push(`/feed/${feed.id}`)">{{ feed.title }}</h1>
           <p class="feed__descr">{{ feed.description }}</p>
         </div>
         <div class="feed__img">

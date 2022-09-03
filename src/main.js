@@ -3,6 +3,7 @@ import App from './App.vue'
 import components from '@/components/UI'
 
 import { initializeApp } from "firebase/app";
+import router from './router/router';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -29,4 +30,6 @@ components.forEach(component => {
 // export const db = firebase.firestore()
 
 
-app.mount('#app')
+app
+.use(router)
+.mount('#app')
