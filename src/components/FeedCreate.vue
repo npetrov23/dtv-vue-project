@@ -40,6 +40,7 @@ export default {
     data() {
         return {
             post: {
+                id: '',
                 title: '',
                 content: '',
                 img: ''
@@ -58,9 +59,11 @@ export default {
             }
 
             let newPost = {
+                id: Date.now(),
                 title: this.post.title,
                 description: description,
                 img: this.post.img,
+                content: this.post.content,
             }
             
             this.$emit('create', newPost);

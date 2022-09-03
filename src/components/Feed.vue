@@ -1,22 +1,22 @@
 <template>
 <section class="container">
-    <div class="feed">
+    <div class="feed" @click="$router.push(`/feed/${feed.id}`)">
       <div class="feed__top">
-        <h1 class="feed__title" @click="$router.push(`/feed/${feed.id}`)">{{ feed.title }}</h1>
+        <h1 class="feed__title">{{ feed.title }}</h1>
           <p class="feed__descr">{{ feed.description }}</p>
         </div>
         <div class="feed__img">
           <img class="feed__img" :src="feed.img" alt="">
         </div>
         <div class="feed__bottom">
-          <p class="feed__bottom-comments">
-            <i class="fa-regular fa-comment"></i> {{ comments }}
-          </p>
-        <div class="feed__bottom-counter">
-          <rating-down @click="ratingDown"></rating-down>
-          <span :class="colorRating">{{ rating }}</span> 
-          <rating-up @click="ratingUp"></rating-up>
-        </div>
+            <p class="feed__bottom-comments">
+                <i class="fa-regular fa-comment"></i> {{ comments }}
+            </p>
+            <div class="feed__bottom-counter">
+                <rating-down @click="ratingDown"></rating-down>
+                <span :class="colorRating">{{ rating }}</span> 
+                <rating-up @click="ratingUp"></rating-up>
+            </div>
        </div>
     </div>
 </section>
@@ -109,10 +109,12 @@ export default {
     background-color: #fff;
     border-radius: 8px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .feed__title {
     font-weight: 500;
+    
 }
 
 .feed__descr {

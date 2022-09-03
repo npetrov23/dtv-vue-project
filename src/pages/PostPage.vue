@@ -25,21 +25,20 @@
       FeedList,
       HeaderSite,
       FeedCreate,
-  },
+    },
       data() {
           return {
               feeds: [],
               windowCreateVisible: false,
               notificationCreateVisible: false,
               file: '',
-              url2: ''
           };
       },
       methods: {
 
           createPost(post) {
               this.addPostFirebase(post);
-              this.feeds.unshift(post);
+            //   this.feeds.unshift(post);
               this.windowCreateVisible = false;
               this.notificationCreateVisible = true;
               setTimeout(() => {
@@ -53,7 +52,7 @@
                db.collection("posts").add(post);
           }
       },
-      mounted() {
+      created() {
         db.collection('/posts').onSnapshot(ref => ref.docChanges().forEach(change => {
             const { i, j, doc, type} = change;
             this.feeds.push({
