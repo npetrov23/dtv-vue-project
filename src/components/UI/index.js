@@ -4,6 +4,7 @@ import RatingDown from "./RatingDown.vue";
 import ModalWindow from "./ModalWindow.vue";
 import NotifyWindow from "./NotifyWindow.vue"
 import ButtonPost from "./ButtonPost.vue"
+import ButtonClose from "./ButtonClose.vue"
 
 export default [
     ButtonSite,
@@ -11,6 +12,7 @@ export default [
     RatingDown,
     ModalWindow,
     NotifyWindow,
-    ButtonPost
+    ButtonPost,
+    ButtonClose
 ]
 

@@ -13,7 +13,7 @@
         v-model="post.content" 
         @click.stop class="form-create__create-content" 
         type="text" 
-        placeholder="Основной текст"
+        placeholder="Нажмите Tab для вставки изображения"
         ></textarea>
 
         <div class="form-button">
@@ -21,7 +21,10 @@
             @click="createPost"
             v-model:title="post.title"
             >Опубликовать</button-post>
+            <!-- <input type="file" ref="imageFile" @change="handlerFile()" accept="image/jpeg,image/png"> -->
         </div>
+
+        
 
     </div>
 
@@ -36,7 +39,8 @@ export default {
                 content: '',
                 img: 'pic.jpg'
             },
-            limit: 90
+            limit: 90,
+            file: "",
         }
     },
     methods: {
@@ -51,6 +55,7 @@ export default {
                 description: description,
                 img: this.post.img,
             }
+            
             this.$emit('create', newPost);
             this.$emit('update:show', false)
             this.post = {
@@ -58,7 +63,12 @@ export default {
                 description: '',
                 content: '',
                 img: ''
-            }
+            };
+        },
+
+        handlerFile() {
+            this.file = this.$refs.imageFile.files[0];
+            this.post.img = URL.createObjectURL(this.file);
         }
     }
 }
