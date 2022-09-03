@@ -1,5 +1,5 @@
 <template>
-    <button v-if="title"
+    <button v-if="!lockedForm"
         class="btn" 
     >
         <slot></slot>
@@ -15,8 +15,11 @@
 export default {
     name: "button-post",
     props: {
-        title: {
-            type: String
+        // title: {
+        //     type: String
+        // },
+        lockedForm: {
+            type: Boolean
         }
     },
     data() {

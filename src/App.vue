@@ -1,3 +1,5 @@
+
+
 <template>
     <div>
       <notification v-model:show="notificationCreateVisible">Материал опубликован</notification>
@@ -17,7 +19,7 @@
   import HeaderSite from './components/HeaderSite.vue';
   import FeedCreate from './components/FeedCreate.vue';
   import db from '@/firebase.js';
-  
+
   export default {
       components: {
       FeedList,
@@ -29,9 +31,12 @@
               feeds: [],
               windowCreateVisible: false,
               notificationCreateVisible: false,
+              file: '',
+              url2: ''
           };
       },
       methods: {
+
           createPost(post) {
               this.addPostFirebase(post);
               this.feeds.unshift(post);
