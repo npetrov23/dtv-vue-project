@@ -26,13 +26,9 @@
 
             <div class="feed__bottom">
                 <p class="feed__bottom-comments">
-                    <i class="fa-regular fa-comment"></i> 0
+                    <i class="fa-regular fa-comment"></i> {{ feed.comments.length }}
                 </p>
-                <div class="feed__bottom-counter">
-                    <rating-down @click="ratingDown"></rating-down>
-                    <span :class="colorRating">{{ feed.rating }}</span>
-                    <rating-up @click="ratingUp"></rating-up>
-                </div>
+                <rating-panel :feed="feed"></rating-panel>
             </div>
         </div>
     </section>
@@ -46,54 +42,6 @@ export default {
             required: true,
         }
     },
-    data() {
-        return {
-            // rating: 0,
-            // comments: 0,
-            actionCounterUp: false,
-            actionCounterDown: false,
-        }
-    },
-    methods: {
-        ratingUp() {
-            if (!this.actionCounterUp && this.actionCounterDown) {
-                this.feed.rating++;
-                this.actionCounterDown = false;
-                this.actionCounterUp = false;
-            }
-            else if (!this.actionCounterUp && !this.actionCounterDown) {
-                this.feed.rating++;
-                this.actionCounterUp = true;
-            }
-
-
-        },
-        ratingDown() {
-            if (!this.actionCounterDown && this.actionCounterUp) {
-                this.feed.rating--;
-                this.actionCounterDown = false;
-                this.actionCounterUp = false;
-            }
-            else if (!this.actionCounterDown && !this.actionCounterUp) {
-                this.feed.rating--;
-                this.actionCounterDown = true;
-            }
-        }
-    },
-    computed: {
-        colorRating() {
-            if (this.feed.rating < 0) {
-                return {
-                    lessZero: true,
-                }
-            }
-            else {
-                return {
-                    aboveZero: true,
-                }
-            }
-        }
-    }
 }
 </script>
 
@@ -113,15 +61,6 @@ export default {
     color: gray;
 }
 
-.aboveZero {
-    color: #2ea83a;
-}
-
-.lessZero {
-    color: red;
-
-}
-
 .feed {
     max-width: 700px;
     background-color: #fff;
@@ -137,7 +76,6 @@ export default {
 
 .feed__descr {
     font-weight: 300;
-    /* height: 5px; */
 }
 
 .feed__title,
@@ -161,14 +99,11 @@ export default {
 }
 
 .feed-detail__top {
-    /* padding-top: 32px; */
     display: flex;
     font-size: 15px;
-    /* height: 32px; */
     line-height: 22px;
     align-items: center;
     width: 600px;
-    /* margin: 0 auto; */
 }
 
 .feed-detail__top-category-icon {
@@ -185,4 +120,5 @@ export default {
 .feed-detail__top-author {
     font-weight: 300;
 }
+
 </style>

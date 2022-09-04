@@ -9,7 +9,7 @@
         placeholder="Заголовок"
         >
 
-        <input @click.stop class="inputfile" name="file" id="file" type="file" ref="imageFile" @change="handlerFile()" accept="image/jpeg,image/png"> 
+        <input @click.stop class="inputfile" name="file" id="file" type="file" ref="imageFile" @change="handlerFile()" > 
         <label for="file">Загрузите изображение</label>
 
         <textarea 
@@ -42,7 +42,9 @@ export default {
                 id: '',
                 title: '',
                 content: '',
-                img: ''
+                img: '',
+                comments: [],
+                rating: 0,
             },
             limit: 90,
             file: "",
@@ -63,6 +65,9 @@ export default {
                 description: description,
                 img: this.post.img,
                 content: this.post.content,
+                rating: this.post.rating,
+                comments: this.post.comments,
+                // countComments: 0,
             }
             
             this.$emit('create', newPost);

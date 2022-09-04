@@ -28,6 +28,7 @@ export default {
         description: doc.data().description,
         img: doc.data().img,
         rating: doc.data().rating,
+        comments: doc.data().comments,
       });
     }));
   }

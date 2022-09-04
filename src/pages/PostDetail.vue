@@ -26,49 +26,29 @@
                     <p class="feed__bottom-comments">
                         <i class="fa-regular fa-comment"></i> {{ postInfo.comments.length }}
                     </p>
-                    <div class="feed__bottom-counter">
-                        <rating-down @click="ratingDown"></rating-down>
-                        <span :class="colorRating">{{ postInfo.rating }}</span>
-                        <rating-up @click="ratingUp"></rating-up>
-                    </div>
+                    <rating-panel :feed="postInfo"></rating-panel>
                 </div>
             </div>
-
-            <div class="comments">
-                <div class="comments__title">
-                    <p>Комментарии</p>
-                </div>
-                <div class="comments__textarea">
-                    <textarea class="comments__textarea" name="" id="" cols="30" rows="10"></textarea>
-
-                </div>
-                <div class="comment__btn">
-                    <button-post>Отправить</button-post>
-                </div>
-                <ul class="comments__list">
-                    <!-- <li class="comments_item">
-                        Какой-то комментарий
-                    </li> -->
-                </ul>
-            </div>
+            <comments-list :id_post="id_post"></comments-list>
         </div>
     </div>
 </template>
 <script>
 import db from '@/firebase.js';
+import CommentsList from '@/components/CommentsList.vue';
 export default {
     data() {
         return {
             id_post: Number(this.$route.params.id),
             postInfo: {
-                title: '',
-                description: '',
-                content: '',
+                title: "",
+                description: "",
+                content: "",
                 comments: [],
                 img: "",
                 rating: 0,
             },
-        }
+        };
     },
     mounted() {
         db.collection("/posts").where("id", "==", this.id_post).onSnapshot(ref => ref.docChanges().forEach(change => {
@@ -78,6 +58,7 @@ export default {
             this.postInfo.img = doc.data().img;
             this.postInfo.content = doc.data().content;
             this.postInfo.rating = doc.data().rating;
+            this.postInfo.comments = doc.data().comments;
         }));
     },
     computed: {
@@ -85,16 +66,16 @@ export default {
             if (this.rating < 0) {
                 return {
                     lessZero: true,
-                }
+                };
             }
             else {
                 return {
                     aboveZero: true,
-                }
+                };
             }
         }
-    }
-
+    },
+    components: { CommentsList }
 }
 </script>
 <style scoped>
@@ -109,10 +90,7 @@ export default {
 .comments {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* margin: 0 auto; */
-    width: 66%;
+    min-width: 1000px;
     background-color: white;
     margin-top: 32px;
     border-top-right-radius: 8px;
@@ -123,8 +101,7 @@ export default {
 .feed-detail {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    max-width: 1000px;
+    min-width: 1000px;
     background-color: white;
     line-height: 30px;
     border-bottom-left-radius: 8px;
@@ -132,7 +109,8 @@ export default {
 }
 
 .feed-detail__img {
-    width: 100%;
+    max-width: 1000px;
+    text-align: center;
 }
 
 .feed-detail__title,
@@ -145,7 +123,6 @@ export default {
 }
 
 .feed-detail__title {
-    /* padding-top: 80px; */
     font-size: 22px;
     font-weight: 500;
 
@@ -167,10 +144,8 @@ export default {
 }
 
 .feed-detail__top {
-    /* padding-top: 32px; */
     display: flex;
     font-size: 15px;
-    /* height: 32px; */
     line-height: 22px;
     align-items: center;
     width: 600px;
@@ -201,41 +176,5 @@ export default {
 .lessZero {
     color: red;
 
-}
-
-.comments__title {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 1.4em;
-    padding-bottom: 32px;
-}
-
-.comments__textarea textarea {
-    border: 1px solid rgba(0, 0, 0, .03);
-    resize: none;
-    line-height: 1.6em;
-    background-color: #f7f7f7;
-    padding: 12px 11px 11px;
-    border-radius: 10px;
-    height: 80px;
-    min-width: 600px;
-}
-
-.comments__textarea {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.comment__btn {
-    margin-left: auto;
-    margin-right: 200px;
-    margin-top: 10px;
-}
-
-.comments__list {
-    margin-bottom: 60px;
 }
 </style>

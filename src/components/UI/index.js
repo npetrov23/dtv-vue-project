@@ -6,6 +6,7 @@ import NotifyWindow from "./NotifyWindow.vue"
 import ButtonPost from "./ButtonPost.vue"
 import ButtonClose from "./ButtonClose.vue"
 import HeaderGui from "./HeaderGui.vue"
+import RatingPanel from "./RatingPanel.vue"
 
 export default [
     ButtonSite,
@@ -15,6 +16,7 @@ export default [
     NotifyWindow,
     ButtonPost,
     ButtonClose,
-    HeaderGui
+    HeaderGui,
+    RatingPanel
 ]
 

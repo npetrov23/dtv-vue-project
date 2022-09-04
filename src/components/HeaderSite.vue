@@ -2,7 +2,7 @@
     <header class="header">
         <nav class="navbar">
             <div class="navbar__logo">
-                <a href="/">DTV</a>
+                <router-link to="/">DTV</router-link>
             </div>
             <div class="navbar__btn-create">
                 <button-site @click="showWindowCreatePost">+ Создать</button-site>

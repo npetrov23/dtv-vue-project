@@ -34,7 +34,7 @@ export default {
             this.windowCreateVisible = true;
         },
         addPostFirebase(post) {
-            db.collection("posts").add(post);
+            db.collection("posts").doc(String(post.id)).set(post);
         }
     },
 }
