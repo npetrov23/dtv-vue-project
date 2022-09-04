@@ -19,7 +19,6 @@ const db = initializeApp(firebaseConfig);
 const app = createApp(App)
 
 components.forEach(component => {
-    console.log(component)
     app.component(component.name, component)
 })
 

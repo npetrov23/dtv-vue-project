@@ -1,7 +1,8 @@
 <template>
     <div>
         <header-gui></header-gui>
-        <div class="container">
+        <spinner v-if="loader"></spinner>
+        <div class="container" v-else>
             <div class="feed-detail">
                 <div class="feed-detail__top">
                     <div class="feed-detail__top-category-icon">
@@ -17,7 +18,6 @@
                     </div>
                 </div>
                 <div class="feed-detail__title">{{ postInfo.title }}</div>
-                <div class="feed-detail__description">{{ postInfo.description }}</div>
                 <div class="feed-detail__img">
                     <img class="feed-detail__img" :src="postInfo.img" alt="">
                 </div>
@@ -48,6 +48,7 @@ export default {
                 img: "",
                 rating: 0,
             },
+            loader: true,
         };
     },
     mounted() {
@@ -59,6 +60,7 @@ export default {
             this.postInfo.content = doc.data().content;
             this.postInfo.rating = doc.data().rating;
             this.postInfo.comments = doc.data().comments;
+            this.loader = false;
         }));
     },
     computed: {

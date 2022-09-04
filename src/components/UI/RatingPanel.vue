@@ -28,14 +28,16 @@ export default {
     },
     methods: {
         ratingUp() {
-            this.actionCounterUp = !this.actionCounterUp;
+            
             if(!this.actionCounterDown) {
+                this.actionCounterUp = !this.actionCounterUp;
                 this.actionCounterUp ? this.feed.rating++ : this.feed.rating--;
             }
         },
         ratingDown() {
-            this.actionCounterDown = !this.actionCounterDown;
+            
             if(!this.actionCounterUp) {
+                this.actionCounterDown = !this.actionCounterDown;
                 this.actionCounterDown ? this.feed.rating-- : this.feed.rating++;
             }
         }

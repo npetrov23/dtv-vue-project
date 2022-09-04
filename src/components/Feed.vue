@@ -62,7 +62,7 @@ export default {
 }
 
 .feed {
-    max-width: 700px;
+    width: 700px;
     background-color: #fff;
     border-radius: 8px;
     margin-bottom: 20px;

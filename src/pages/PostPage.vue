@@ -1,7 +1,11 @@
 <template>
   <div>
     <header-gui></header-gui>
-    <feed-list :feeds="feeds"></feed-list>
+    <spinner v-if="loader"></spinner>
+    <feed-list 
+      v-else
+      :feeds="feeds
+    "></feed-list>
   </div>
 </template>
   
@@ -17,6 +21,7 @@ export default {
     return {
       feeds: [],
       file: '',
+      loader: true,
     };
   },
   mounted() {
@@ -30,6 +35,7 @@ export default {
         rating: doc.data().rating,
         comments: doc.data().comments,
       });
+        this.loader = false;
     }));
   }
 }

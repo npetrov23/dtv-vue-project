@@ -7,6 +7,7 @@ import ButtonPost from "./ButtonPost.vue"
 import ButtonClose from "./ButtonClose.vue"
 import HeaderGui from "./HeaderGui.vue"
 import RatingPanel from "./RatingPanel.vue"
+import Spinner from "./Spinner.vue"
 
 export default [
     ButtonSite,
@@ -17,6 +18,7 @@ export default [
     ButtonPost,
     ButtonClose,
     HeaderGui,
-    RatingPanel
+    RatingPanel,
+    Spinner
 ]
 

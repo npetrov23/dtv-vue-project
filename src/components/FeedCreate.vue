@@ -16,9 +16,10 @@
         v-model="post.content" 
         @click.stop class="form-create__create-content" 
         type="text" 
+        rows="10"
         placeholder="Основной текст"
-        ></textarea>
 
+        ></textarea>
         <div class="form-button">
             <button-post 
             @click="createPost"
@@ -26,6 +27,7 @@
             >Опубликовать</button-post>
             <div class="loading" v-if="onloadImg">Загрузка фотографии...</div>
         </div>  
+
     </div>
 
 
@@ -67,7 +69,6 @@ export default {
                 content: this.post.content,
                 rating: this.post.rating,
                 comments: this.post.comments,
-                // countComments: 0,
             }
             
             this.$emit('create', newPost);
@@ -91,16 +92,12 @@ export default {
             const storageRef = await ref(storage, "images/" + this.file.name);
  
             await uploadBytes(storageRef, this.file);
-            await function () {
-                var newFileRef = push(databaseReference);
-            
-                set(newFileRef, {
-                    "name": this.file.name
-                });
-            }
 
             this.post.img = await getDownloadURL(storageRef);
-            this.onloadImg = false;
+            if(this.post.img) {
+                this.onloadImg = false;
+            }
+            
         },
 
   },
@@ -122,9 +119,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin-top: 60px; */
+    justify-content: center;
     position: relative;
-    /* margin-bottom: 50px; */
 }
 .inputfile {
 	width: 0.1px;
@@ -140,7 +136,6 @@ export default {
     display: inline-block;
     padding: 40px 25px;
     width: 80%;
-    /* opacity: 0.2; */
     font-size: 20px;
     border-radius: 8px;
     text-align: center;
@@ -154,7 +149,7 @@ export default {
     background-color: rgba(70,131,217,0.10);
 }
 .inputfile + label {
-	cursor: pointer; /* "hand" cursor */
+	cursor: pointer;
 }
 .form-create__create-title,
 .form-create__create-descr,
@@ -175,12 +170,7 @@ export default {
     width: 80%; 
     resize: none;
 }
-.form-create__create-descr {
-    height: 100px;
-}
-.form-create__create-content {
-    height: 400px;
-}
+
 :active, :hover, :focus {
     outline: 0;
     outline-offset: 0;
@@ -221,5 +211,10 @@ export default {
   border-radius: 3px;
   cursor: pointer;
   margin: 0 auto;
+}
+.form-button {
+    position: absolute;
+    left: 0;
+    top: 65vh;
 }
 </style>
