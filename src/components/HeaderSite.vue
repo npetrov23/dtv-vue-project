@@ -1,14 +1,14 @@
 <template>
     <header class="header">
-      <nav class="navbar">
-          <div class="navbar__logo">
-              <a href="/">DTV</a>
-          </div>
-          <div class="navbar__btn-create">
-              <button-site @click="showWindowCreatePost">+ Создать</button-site>
-          </div>
-      </nav>
-  </header>
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <a href="/">DTV</a>
+            </div>
+            <div class="navbar__btn-create">
+                <button-site @click="showWindowCreatePost">+ Создать</button-site>
+            </div>
+        </nav>
+    </header>
 </template>
 
 <script>

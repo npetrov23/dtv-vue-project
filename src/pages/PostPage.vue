@@ -1,73 +1,39 @@
-
-
 <template>
-    <div>
-      <notification v-model:show="notificationCreateVisible">Материал опубликован</notification>
-      <header-site 
-          @create="createPost" 
-          @show="showWindowCreatePost"
-          ></header-site>
-      <modal-window v-model:show="windowCreateVisible">
-        <feed-create @create="createPost"></feed-create>
-      </modal-window>
-      <feed-list :feeds="feeds" ></feed-list>
-    </div>
-  </template>
+  <div>
+    <header-gui></header-gui>
+    <feed-list :feeds="feeds"></feed-list>
+  </div>
+</template>
   
   <script>
-  import FeedList from '@/components/FeedList.vue';
-  import HeaderSite from '@/components/HeaderSite.vue';
-  import FeedCreate from '@/components/FeedCreate.vue';
-  import db from '@/firebase.js';
+import FeedList from '@/components/FeedList.vue';
+import db from '@/firebase.js';
 
-  export default {
-      components: {
-      FeedList,
-      HeaderSite,
-      FeedCreate,
-    },
-      data() {
-          return {
-              feeds: [],
-              windowCreateVisible: false,
-              notificationCreateVisible: false,
-              file: '',
-          };
-      },
-      methods: {
-
-          createPost(post) {
-              this.addPostFirebase(post);
-            //   this.feeds.unshift(post);
-              this.windowCreateVisible = false;
-              this.notificationCreateVisible = true;
-              setTimeout(() => {
-                  this.notificationCreateVisible = false
-              }, 1500)
-          },
-          showWindowCreatePost() {
-              this.windowCreateVisible = true;
-          },
-          addPostFirebase(post) {
-               db.collection("posts").add(post);
-          }
-      },
-      created() {
-        db.collection('/posts').onSnapshot(ref => ref.docChanges().forEach(change => {
-            const { i, j, doc, type} = change;
-            this.feeds.unshift({
-                id: doc.data().id,
-                title: doc.data().title,
-                description: doc.data().description,
-                img: doc.data().img,
-                rating: doc.data().rating,
-            });
-        }));
-      }
+export default {
+  components: {
+    FeedList,
+  },
+  data() {
+    return {
+      feeds: [],
+      file: '',
+    };
+  },
+  mounted() {
+    db.collection('/posts').onSnapshot(ref => ref.docChanges().forEach(change => {
+      const { i, j, doc, type } = change;
+      this.feeds.unshift({
+        id: doc.data().id,
+        title: doc.data().title,
+        description: doc.data().description,
+        img: doc.data().img,
+        rating: doc.data().rating,
+      });
+    }));
   }
-  </script>
+}
+</script>
   
   <style>
-
   </style>
   

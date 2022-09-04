@@ -15,9 +15,6 @@
 export default {
     name: "button-post",
     props: {
-        // title: {
-        //     type: String
-        // },
         lockedForm: {
             type: Boolean
         }
@@ -41,7 +38,6 @@ export default {
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
-    /* margin-top: 10px; */
     box-shadow: 1px 4px 8px -4px rgba(34, 60, 80, 0.2);
 }
 

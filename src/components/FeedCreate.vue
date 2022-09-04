@@ -25,10 +25,7 @@
             v-model:lockedForm="lockCreatedPost"
             >Опубликовать</button-post>
             <div class="loading" v-if="onloadImg">Загрузка фотографии...</div>
-        </div>
-
-        
-
+        </div>  
     </div>
 
 
@@ -36,7 +33,9 @@
 <script>
 import { getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
 
+
 export default {
+
     data() {
         return {
             post: {

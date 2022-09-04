@@ -5,6 +5,7 @@ import ModalWindow from "./ModalWindow.vue";
 import NotifyWindow from "./NotifyWindow.vue"
 import ButtonPost from "./ButtonPost.vue"
 import ButtonClose from "./ButtonClose.vue"
+import HeaderGui from "./HeaderGui.vue"
 
 export default [
     ButtonSite,
@@ -13,6 +14,7 @@ export default [
     ModalWindow,
     NotifyWindow,
     ButtonPost,
-    ButtonClose
+    ButtonClose,
+    HeaderGui
 ]
 

@@ -1,7 +1,6 @@
 <template>
     <div>
-        <header-site @create="createPost" @show="showWindowCreatePost"></header-site>
-
+        <header-gui></header-gui>
         <div class="container">
             <div class="feed-detail">
                 <div class="feed-detail__top">
@@ -41,7 +40,7 @@
                 </div>
                 <div class="comments__textarea">
                     <textarea class="comments__textarea" name="" id="" cols="30" rows="10"></textarea>
-                    
+
                 </div>
                 <div class="comment__btn">
                     <button-post>Отправить</button-post>
@@ -52,25 +51,12 @@
                     </li> -->
                 </ul>
             </div>
-
-
-            <!-- <div class="feed-detail__bottom">
-                        <i class="fa-regular fa-comment"></i> {{ comments }}
-                        <rating-down @click="ratingDown"></rating-down>
-                        <span :class="colorRating">{{ rating }}</span> 
-                        <rating-up @click="ratingUp"></rating-up>
-                </div> -->
         </div>
     </div>
-    <!-- </div> -->
 </template>
 <script>
-import HeaderSite from '@/components/HeaderSite.vue';
 import db from '@/firebase.js';
 export default {
-    components: {
-        HeaderSite,
-    },
     data() {
         return {
             id_post: Number(this.$route.params.id),
@@ -81,7 +67,7 @@ export default {
                 comments: [],
                 img: "",
                 rating: 0,
-            }
+            },
         }
     },
     mounted() {
@@ -227,8 +213,8 @@ export default {
     padding-bottom: 32px;
 }
 
-.comments__textarea textarea{
-    border: 1px solid rgba(0,0,0,.03);
+.comments__textarea textarea {
+    border: 1px solid rgba(0, 0, 0, .03);
     resize: none;
     line-height: 1.6em;
     background-color: #f7f7f7;
